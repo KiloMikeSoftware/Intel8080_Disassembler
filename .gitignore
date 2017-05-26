@@ -30,3 +30,23 @@
 *.exe
 *.out
 *.app
+
+# Ignore all ROMS in roms folder since they must be legally obtained
+roms/*
+!roms/README.txt
+
+# Don't include certain project files
+src/.vs
+src/.vs/*
+src/Debug
+src/Debug/*
+src/Release
+src/Release/*
+src/Intel8080/Debug
+src/Intel8080/Debug/*
+src/Intel8080/Release
+src/Intel8080/Release/*
+src/Intel8080Test/Debug
+src/Intel8080Test/Debug/*
+src/Intel8080Test/Release
+src/Intel8080Test/Release/*
