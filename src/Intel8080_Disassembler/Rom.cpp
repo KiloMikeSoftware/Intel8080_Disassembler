@@ -1,7 +1,7 @@
 #include "Rom.h"
 #include <ios>
 #include <fstream>
-
+#include <sstream>
 
 Rom::Rom(std::string path)
 {
@@ -30,11 +30,14 @@ Rom::~Rom()
 
 void Rom::Dump()
 {
-	std::string name;
-	std::cout << "Save as (with extension): ";
-	std::getline(std::cin, name);
+	std::ostringstream ss;
+	ss << std::hex << std::setfill('0');
 
-	std::ofstream bin("../../roms/" + name, std::ios::out | std::ios::binary); //TODO: MAKE THIS PORTABLE.
-	bin.write(reinterpret_cast<char *>(buffer), size);
-	bin.close();
+	for (int i = 0; i < size; i++)
+	{
+		ss << std::setw(2) << static_cast<unsigned>(buffer[i]);
+	}
+
+
+	std::cout << ss.str();
 }

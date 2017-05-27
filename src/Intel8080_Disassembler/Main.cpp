@@ -26,23 +26,27 @@ int main()
 		//Try to get initialize a rom with the user inputted path - it will throw an error if it can't initialize.
 		try
 		{
+			std::cout << "Trying to load ROM." << std::endl;
 			rom = new Rom(path);
 			got = true;
-			std::cout << "Rom Loaded. Initializing." << std::endl;
 		}
 		catch (std::exception e)
 		{
 			got = false;
-			std::cout << "Error loading rom, the error message is: \"" << e.what() << "\". Try again." << std::endl;
+			std::cout << "Error loading ROM, the error message is: \"" << e.what() << "\". Try again." << std::endl;
 		}
 
 	}
 
+	std::cout << "ROM Loaded. Press enter to continue." << std::endl;
+	std::cin.ignore();
+
 	//Create the disassembler.
-	Disassembler disassembler(*rom);
+	Disassembler disassembler(rom);
 	disassembler.Disassemble(); //this will block until it's finished.
 
-	//Destroy the rom
+	//Destroy the rom.
+	rom->Dump();
 	delete rom;
 
 	//Close the application.
