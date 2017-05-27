@@ -25,6 +25,7 @@ Disassembler::~Disassembler()
 void Disassembler::NOP_NoOperation_0x00(uint8_t * opcode, int & cycles, int & pc)
 {
 	cycles = 1;
+	std::cout << "NOP" << std::endl;
 }
 
 
