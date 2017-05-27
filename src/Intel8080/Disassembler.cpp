@@ -6,13 +6,20 @@
 //The portion of the cycle identified with a clearly defined activity is called a State.
 //There can be several states in a cycle.
 
+Disassembler::Disassembler(Rom r) : rom(r)
+{
+	
+}
 
-Disassembler::Disassembler()
+Disassembler::~Disassembler()
 {
 }
 
+bool Disassembler::Begin()
+{
+}
 
-Disassembler::~Disassembler()
+bool Disassembler::WriteToFile()
 {
 }
 

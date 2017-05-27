@@ -4,6 +4,7 @@
 #include <ios>
 #include <fstream>
 #include "Rom.h"
+#include "Disassembler.h"
 
 int main()
 {
@@ -22,10 +23,12 @@ int main()
 		std::cout << "Path: ";
 		std::getline(std::cin, path);
 
+		//Try to get initialize a rom with the user inputted path - it will throw an error if it can't initialize.
 		try
 		{
 			rom = new Rom(path);
 			got = true;
+			std::cout << "Rom Loaded. Initializing." << std::endl;
 		}
 		catch (std::exception e)
 		{
@@ -35,11 +38,14 @@ int main()
 
 	}
 
-	std::cout << "Rom Loaded. Initializing." << std::endl;
+	//Create the disassembler.
+	Disassembler disassembler(*rom);
+	disassembler.Begin(); //this will block until it's finished.
 
+	//Destroy the rom
+	delete rom;
 
-
-
+	//Close the application.
 	return 0;
 }
 
