@@ -40,7 +40,7 @@ int main()
 
 	//Create the disassembler.
 	Disassembler disassembler(*rom);
-	disassembler.Begin(); //this will block until it's finished.
+	disassembler.Disassemble(); //this will block until it's finished.
 
 	//Destroy the rom
 	delete rom;

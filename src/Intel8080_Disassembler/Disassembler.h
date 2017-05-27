@@ -11,7 +11,7 @@ class Disassembler
 public:
 	Disassembler(Rom r);
 	~Disassembler();
-	bool Begin();					//A blocking function which will start the disassembly process
+	bool Disassemble();					//A blocking function which will start the disassembly process
 	bool WriteToFile();				//A function which will write the disassembled assembly code to a file
 
 private:

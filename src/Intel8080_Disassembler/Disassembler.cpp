@@ -15,12 +15,16 @@ Disassembler::~Disassembler()
 {
 }
 
-bool Disassembler::Begin()
+bool Disassembler::Disassemble()
 {
+
+	return true;
 }
 
 bool Disassembler::WriteToFile()
 {
+
+	return false;
 }
 
 //This function is the NOP function - NOP is the pneumonic for "No Operation".

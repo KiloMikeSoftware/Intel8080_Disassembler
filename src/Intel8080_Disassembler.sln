@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intel8080", "Intel8080\Intel8080.vcxproj", "{A438CE71-D82E-4726-98D9-CAE20BE1CCD6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intel8080_Disassembler", "Intel8080_Disassembler\Intel8080_Disassembler.vcxproj", "{A438CE71-D82E-4726-98D9-CAE20BE1CCD6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Intel8080Test", "Intel8080Test\Intel8080Test.vcxproj", "{9E7A64C6-E1BC-4AD4-8730-8AF000C41D49}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Disassembler_Tests", "Disassembler_Tests\Disassembler_Tests.vcxproj", "{9E7A64C6-E1BC-4AD4-8730-8AF000C41D49}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
