@@ -1,12 +1,8 @@
 // Intel8080.cpp : Defines the entry point for the console application.
-//
-
-#include "stdafx.h"
 #include <iostream>
 #include <string>
 #include <ios>
 #include <fstream>
-#include "CPU.h"
 #include "Rom.h"
 
 int main()
