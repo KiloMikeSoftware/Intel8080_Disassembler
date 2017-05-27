@@ -34,13 +34,16 @@ int main()
 		catch (std::exception e)
 		{
 			got = false;
-			std::cout << "Error loading rom, the error message is: " << e.what() << ". Try again." << std::endl;
+			std::cout << "Error loading rom, the error message is: \"" << e.what() << "\". Try again." << std::endl;
 		}
 
 	}
 
-	//Dump the rom for testing.
-	rom->Dump();
+	std::cout << "Rom Loaded. Initializing." << std::endl;
+
+
+
+
 	return 0;
 }
 
