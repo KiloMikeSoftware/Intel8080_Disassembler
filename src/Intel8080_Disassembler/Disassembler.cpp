@@ -17,7 +17,17 @@ Disassembler::~Disassembler()
 
 bool Disassembler::Disassemble()
 {
+	uint8_t pc = 0; //This isn't actually a real program counter, but serves a similar purpose.
+	uint8_t opcode = 0;
+	int size = rom->Size();
 
+	//Loop until we get to the end of the rom.
+	while (pc < size)
+	{
+		//Start by feeding the current opcode to the disassembler at the given pc address.
+		opcode = (*rom)[pc];
+		DisassembleOpCode(opcode, pc); //opcode and pc are passed by reference, thus both will be changed.
+	}
 	return true;
 }
 
@@ -27,34 +37,43 @@ bool Disassembler::WriteToFile()
 	return false;
 }
 
-//This function is the NOP function - NOP is the pneumonic for "No Operation".
+//Get the buffer that is used to store the result of disassembly
+std::string Disassembler::GetBuffer()
+{
+	return outStr;
+}
+
+//This function is the NOP function - NOP is the mnemonic for "No Operation".
 //No operation is performed. The registers and flags are unaffected.
 //Cycles: 1
 //States: 4
 //Flags: None
-std::string Disassembler::NOP_NoOperation_0x00(uint8_t * opcode, int & cycles, int & pc)
+void Disassembler::NOP_NoOperation_0x00(int & cycles, uint8_t& pc)
 {
-	cycles = 1;
+	cycles = 1;												//The NOP operation only utilizes one cycle.
 	std::ostringstream output;								//Create a string stream so we can return the line
 
-	output << std::setfill('0') << std::setw(4) << pc;		//Print program counter
-	output << '\t';									
-	output << "NOP";										//Print the operation name
-	output << std::endl;
+	PrintPC(output, pc);									//Print the program counter								
+	output << "NOP" << std::endl;							//Print the operation name
+	pc++;													//Increment the program counter.
 
-	return output.str();
+	outStr += output.str();									//Append this to the outStr.
+}
+
+void Disassembler::PrintPC(std::ostringstream& in, uint8_t pc)
+{
+	in << std::setfill('0') << std::setw(4) << (int)pc << '\t';
 }
 
 
-int Disassembler::DisassembleOpCode(uint8_t * inBuffer, int pc)
+void Disassembler::DisassembleOpCode(const uint8_t& opcode, uint8_t& pc)
 {
-	uint8_t * opcode = &inBuffer[pc];		//get a reference to the current memory location the program counter is at
-	int cycles = 0;							//on the 8080 not all instructions are just one cycle, therefore lets use this variable to determine how many cycles an instruction is.
+	int cycles = 0;	//on the 8080 not all instructions are just one cycle, therefore lets use this variable to determine how many cycles an instruction is.
 	
 	//This switch iterates over all 256 opcodes.
-	switch (*opcode)
+	switch (opcode)
 	{
-		case 0x00: outBuffer << NOP_NoOperation_0x00(opcode, cycles, pc); break;	//NOP - No Operation.
+		case 0x00: NOP_NoOperation_0x00(cycles, pc); break;	//NOP - No Operation.
 		case 0x01: break;
 		case 0x02: break;
 		case 0x03: break;
@@ -310,7 +329,6 @@ int Disassembler::DisassembleOpCode(uint8_t * inBuffer, int pc)
 		case 0xFD: break;
 		case 0xFE: break;
 		case 0xFF: break;
+		default: throw std::runtime_error("The disassembly could not proceed. An unexpected opcode was provided.");
 	}
-
-	return cycles;
 }

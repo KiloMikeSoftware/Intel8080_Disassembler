@@ -1,7 +1,13 @@
 #include "Rom.h"
-#include <ios>
-#include <fstream>
-#include <sstream>
+
+uint8_t& Rom::operator[](int i)
+{
+	return buffer[i];
+}
+
+Rom::Rom()
+{
+}
 
 Rom::Rom(std::string path)
 {
@@ -17,15 +23,24 @@ Rom::Rom(std::string path)
 	size = file.tellg();
 	file.seekg(0, std::ios::beg);
 
-	buffer = new uint8_t[size];
+	//Resize vector to be equal to the file size in terms of bytes
+	buffer.resize(size);
 
-	file.read(reinterpret_cast<char *>(buffer), size);
+	//Next, we read the file in to buffer. It's saying - start at the 0th element, and extract size elements.
+	//Note we are passing buffer as a reference - so that the copy in this scope, and the copy in the methods scope, is the same.
+	//Otherwise, our copy of buffer won't change after the method finishes. (We could do buffer = file.read(...) but that is not possible given the method signature.
+	file.read(reinterpret_cast<char*>(&buffer[0]), size);
+}
+
+Rom::Rom(std::vector<uint8_t> data)
+{
+	buffer = data;
+	size = buffer.size();
 }
 
 
 Rom::~Rom()
 {
-	delete[] buffer;
 }
 
 void Rom::Dump()
@@ -37,7 +52,6 @@ void Rom::Dump()
 	{
 		ss << std::setw(2) << static_cast<unsigned>(buffer[i]);
 	}
-
 
 	std::cout << ss.str();
 }

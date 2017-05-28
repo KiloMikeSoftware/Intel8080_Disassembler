@@ -151,6 +151,11 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Rom.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Disassembler_Tests\Disassembler_Tests.vcxproj">
+      <Project>{4e352017-7ea1-41dd-9b21-0de48393b0ea}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

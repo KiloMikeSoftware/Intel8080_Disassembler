@@ -11,14 +11,16 @@ class Disassembler
 public:
 	Disassembler(Rom * r);
 	~Disassembler();
-	bool Disassemble();					//A blocking function which will start the disassembly process
+	bool Disassemble();				//A blocking function which will start the disassembly process
 	bool WriteToFile();				//A function which will write the disassembled assembly code to a file
 
+	std::string GetBuffer();
 private:
 	Rom * rom;						//The rom which in which we are going to disassemble.
-	std::ostringstream outBuffer;	//This buffer is used to store the dissassembled assembly.
+	std::string outStr;				//This buffer is used to store the dissassembled assembly.
 
-	int DisassembleOpCode(uint8_t * buffer, int pc);
-	std::string NOP_NoOperation_0x00(uint8_t * opcode, int &cycles, int &pc);
+	void DisassembleOpCode(const uint8_t& opcode, uint8_t& pc);
+	void NOP_NoOperation_0x00(int& cycles, uint8_t& pc);
+	void PrintPC(std::ostringstream& in, uint8_t pc);
 };
 
